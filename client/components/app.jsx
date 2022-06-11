@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 //import './stylesheets/styling.scss';
 import {Box, Input, Button} from '@mui/material';
+import Navbar from './Navbar.jsx';
+
 
 function App (props) {
   const [userData, setUserData] = useState({
@@ -21,13 +23,12 @@ function App (props) {
     setUserData(() => ({...userData, [e.target.name]: e.target.value}));
     console.log(userData);
   }
-  
-  
-
   let value = '';
 
   return (
+    
     <div>
+      <Navbar/>
       <form onSubmit={handleSubmit}>
         <label>
           Username:
