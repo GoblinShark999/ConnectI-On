@@ -15,7 +15,10 @@ const userController = require('../controllers/userController');
 
 //create event?
 
-//chats
-app.get('/chats/:event')
+//chats, user/chats/:event will store websocket connection
+router.get('/chats/:event', (req, res) => {
+    console.log("in eventsrouter")
+    res.status(200).send("working");
+})
 
 module.exports = router;
