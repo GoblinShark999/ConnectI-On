@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const app = express();
+
 const eventsController = require('../controllers/eventsController.js');
 const userController = require('../controllers/userController');
 
@@ -17,7 +17,8 @@ const userController = require('../controllers/userController');
 
 //chats, user/chats/:event will store websocket connection
 router.get('/chats/:event', (req, res) => {
-    console.log("in eventsrouter")
+    console.log("in eventsRouter")
+    console.log(res.locals);
     res.status(200).send("working");
 })
 
