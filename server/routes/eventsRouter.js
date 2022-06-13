@@ -11,7 +11,7 @@ router.post('/signup', userController.createUser, (req,res)=>{ //signup
     res.status(200).json("User created")
 })
 
-router.post('/login', userController.getUser, (req,res) =>{ //login
+router.get('/login', userController.getUser, (req,res) =>{ //login
     //if using JWTs
     // const { username } = req.body; //make sure information is sent in the body instead of queries, shouldn't be able to see pw in browser
     // const user = { user: username };
