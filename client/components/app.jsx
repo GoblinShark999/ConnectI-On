@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 //import './stylesheets/styling.scss';
 import {Box, Input, Button} from '@mui/material';
-
+import EventsPage from './EventsPage.jsx'
 
 function App(props) {
     const [userData, setUserData] = useState({
@@ -9,6 +9,15 @@ function App(props) {
         password: '',
         location: ''
     });
+
+    const [eventData, setEventData] = useState ({
+        searchEventName: '',
+        searchEventLocation: '',
+        eventCardsContainer: []
+    });
+
+
+
     const [isNewUser, setIsNewUser] = useState(false);
     return (
         <div>

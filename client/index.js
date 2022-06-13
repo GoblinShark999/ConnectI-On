@@ -3,9 +3,9 @@ import { render } from 'react-dom';
 import App from './components/app.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import Eventspage from './components/eventsPage.jsx'
+import EventsPage from './components/EventsPage.jsx'
 
-// import styling from './stylesheets/styling.scss'; //client/stylesheets/styling.scss
+import styling from './stylesheets/styling.scss'; //client/stylesheets/styling.scss
 
 // render(
 //     <App />,
@@ -14,4 +14,4 @@ import Eventspage from './components/eventsPage.jsx'
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<Eventspage />);
+root.render(<App />);

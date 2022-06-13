@@ -1,53 +1,41 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 //import './stylesheets/styling.scss';
 import {Box, Input, Button} from '@mui/material';
 import Navbar from './Navbar.jsx'
-import eventCards from './eventCards.jsx'
-
-const event = {
-  name: '',
-  location: ''
-}
-
-// const eventContext = createContext(event);
+import CardsContainer from './CardsContainer.jsx'
 
 
-function eventsPage (props) {
-  const [eventData, setEventData] = useState ({
-    name: '',
-    location: '',
-    eventCards: []
-  })
+function EventsPage (props) {
+  // on initial render only, set event cards to all events in user default location
+  useEffect(() => {
+    fetch(`/events/?username=${props.userData.username}&location=${props.userData.location}`)
+    .then((data) => data.json())
+    .then((data) => {
+      props.setEventData({eventCardsContainer: [...data]})
+    })
+    .catch((err) => {
+      console.log('error!')
+    })
+  }, []);
 
-  // useEffect(() => {
-  //   setEventData(eventData)
-  // }, [eventData])
-
-
-  function handleChange(e, ){
-    setEventData(() => ({...eventData, [e.target.name]: e.target.value}));
-    console.log(eventData, 'from handle change');
+  // handles search inputs
+  function handleEventSearchInput(e){
+    props.setEventData(() => ({...props.eventData, [e.target.name]: e.target.value}));
   }
 
-  function handleSubmit(e){
+  // get req to back end with event name or new location or both
+  // returns event data objects to populate page
+  function handleSearchSubmit(e){
     e.preventDefault();
 
-    fetch(`/events/searchEvents?name=${eventData.name}&location=${eventData.location}`)
+    fetch(`/events/searchEvents?name=${props.eventData.name}&location=${props.eventData.location}`)
       .then((data) => data.json())
       .then((data) => {
-        setEventData({eventCards: [...data]})
+        props.setEventData({eventCardsContainer: [...data]})
       })
       .catch((err) => {
         console.log('error!')
       })
-    }
-
-    // invoked when add events button is clicked
-    // sends get req to backend to direct to add events page
-      // when event is created, redirected back to add events page
-    function handleAddEvent(e){
-      fetch(`/events/addNewEvent?name=${eventData.name}&location=${eventData.location}`)
-      .catch(err => console.log('error!'))
     }
 
 
@@ -56,26 +44,24 @@ function eventsPage (props) {
       <div>
         <Navbar />
       </div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSearchSubmit}>
         <label>
           Event Search:
-          <input type="text" name="name" value={eventData.name} onChange={handleChange}/>
+          <input type="text" name="name" value={props.eventData.searchEventName} onChange={handleEventSearchInput}/>
           Location:
-          <input type="text" name="location" value={eventData.location} onChange={handleChange}/>
+          <input type="text" name="location" value={props.eventData.searchEventLocation} onChange={handleEventSearchInput}/>
         </label>
         <div className='testButtonColor'>
         <Button className="eventSearchButton" type="submit" value="Submit" >Submit</Button>
-        <Button className="eventAddButton" type="submit" value="Add Event" onClick={handleAddEvent}>Add Event</Button>
+        {/* <Button className="eventAddButton" type="submit" value="Add Event" onClick={handleAddEvent}>Add Event</Button> */}
         </div>
       </form>
       <div id='eventCards'>
-        {/* <eventContext.Provider value={event.name, event.location}>
-          <eventCards />
-        </eventContext.Provider> */}
+        <CardsContainter eventCardContainer={eventCardsContainer}/>
       </div>
     </div>
   )
 
 }
 
-export default eventsPage;
+export default EventsPage;
