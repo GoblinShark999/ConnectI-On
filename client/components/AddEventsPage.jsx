@@ -5,7 +5,7 @@ const AddEventsPage = (props) => {
             eventDescription: '',
             eventDate: '',
         });
-    }
+
         return (
             <form>{/*//onSubmit={handleSubmit()}>*/}
                 <label>
@@ -25,18 +25,18 @@ const AddEventsPage = (props) => {
         )
     }
 
-    const addEvent = (props) => {
-        fetch('http://localhost:8080/events', {
-            method: 'Post',
-            headers: {
-                'Content-Type':
-                application/json'
-            },
-        body.JSON.stringify({
-            "name": props.event.name;
-            "location": props.event.location;
-            "description":
-            "date:"
-        })
-        })
+    // const addEvent = (props) => {
+    //     fetch('http://localhost:8080/events', {
+    //         method: 'Post',
+    //         headers: {
+    //             'Content-Type':
+    //             application/json'
+    //         }
+    //     body: JSON.stringify({
+    //         "name": props.event.name;
+    //         "location": props.event.location;
+    //         "description": props.event.description;
+    //         "date:" props.event.date;
+    //     })
+    // })}
     }
