@@ -1,81 +1,57 @@
 import React, {useEffect, useState} from 'react';
 //import './stylesheets/styling.scss';
 import {Box, Input, Button} from '@mui/material';
-import Navbar from './Navbar.jsx';
 
 
-function App (props) {
-  const [userData, setUserData] = useState({
-    username: '', 
-    password: '', 
-    location: ''
-  }); 
+function App(props) {
+    const [userData, setUserData] = useState({
+        username: '',
+        password: '',
+        location: ''
+    });
+    const [isNewUser, setIsNewUser] = useState(false);
+    return (
+        <div>
+            <Login userData={userData} setUserData={setUserData} isNewUser={isNewUser} setIsNewUser={setIsNewUser}/>
+        </div>
 
-  useEffect(() => {
-     setUserData(userData)
-  }, [userData])
-  
-  function handleSubmit(e){
-    
-  }
+    )
 
-  function handleChange(e){
-    setUserData(() => ({...userData, [e.target.name]: e.target.value}));
-    console.log(userData);
-  }
-  let value = '';
-
-  return (
-    
-    <div>
-      <Navbar/>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username:
-          <input type="text" name = 'username' value = {userData.username} onChange={handleChange}/>
-          Password:
-          <input type="text" name = 'password' value = {userData.password} onChange={handleChange}/>
-          Location:
-          <input type="text" name = 'location' value = {userData.location} onChange={handleChange}/>
-        </label>
-        <Button type="submit" value="Log in" />
-      </form>
-    </div>
-
-  )
 }
-export default App; 
-// <button onClick={(event) => setUserData({...userData, [event.target.name]: event.target.value})}></button>
+export default App;
 
-// const [value, setValue] = React.useState('');
-  
-// function handleChange(e){
-//   setValue(e.target.value);
-//   //console.log(value);
-// }
+function handleNewUserInput(e, userData, setUserData) {
+    setUserData(() => ({...userData, [e.target.name]: e.target.value}));
+}
 
-// function handleSubmit(e){
-//   props.add_market(value);
-//   setValue('');
-//   //console.log(props);
-//   //this.setState({value: event.target.value});
-
-//   e.preventDefault();
-// }
-
-/* <form onSubmit={handleSubmit}>
-        <label>
-          Location:
-          <input type="text" value = {value} onChange={handleChange}/>
-        </label>
-        <input type="submit" value="Add Market" />
-      </form> */
-
-
-// const [allValues, setAllValues] = useState({
-//   mobile: '',
-//   username: '',
-//   email: '',
-//   password: '',
-//   confirmPassword: ''
-// });
+const Login = (props) => {
+    if (!props.isNewUser) {
+        return (
+            <form>{/*//onSubmit={handleSubmit()}>*/}
+                <label>
+                    Username:
+                    <input type="text" name='username' value={props.userData.username} onChange={(event) => {handleNewUserInput(event, props.userData, props.setUserData)}}/>
+                    Password:
+                    <input type="text" name='password' value={props.userData.password} onChange={(event) => {handleNewUserInput(event, props.userData, props.setUserData)}}/>
+                    <Button style={{backgroundColor: "red"}} type="submit" value="Log in" onClick={() => {
+                    }}/>
+                    <Button style={{backgroundColor: "blue"}} type="submit" value="Sign Up" onClick={() => {
+                        props.setIsNewUser(!props.isNewUser);
+                    }}/>
+                </label>
+            </form>
+        )
+    } else {
+        return (<Box>
+                Username:
+                <input type="text" name='username' value={props.userData.username} onChange={(e) => {handleNewUserInput(e, props.userData, props.setUserData)}}/>
+                Password:
+                <input type="text" name='password' value={props.userData.password} onChange={(e) => {handleNewUserInput(e, props.userData, props.setUserData)}}/>
+                Location:
+                <input type="text" name='location' value={props.userData.location} onChange={(e) => {handleNewUserInput(e, props.userData, props.setUserData)}}/>
+                <Button style={{backgroundColor: "green"}} type="submit" value="Signed in" onClick={() => {
+                }}/>
+            </Box>
+        )
+    }
+}
