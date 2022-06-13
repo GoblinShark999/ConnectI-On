@@ -2,6 +2,9 @@ import React from 'react'
 
 export default function DisplayChat(props) {
   return (
-    <div>DisplayChat</div>
+    <div>
+      Message 1
+
+    </div>
   )
 }

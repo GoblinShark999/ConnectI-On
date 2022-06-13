@@ -1,8 +1,8 @@
 @import '_variables.scss';
 
-body{
-  background-color: $body-color;
-}
+// body{
+//   background-color: $body-color;
+// }
 .navbar {
   background-color: $navbar-color;
   display: grid;
@@ -20,4 +20,16 @@ body{
   grid-column: 6 / 6;
   color: inherit;
   text-decoration: inherit;
+}
+
+.chat{
+  background-color: #0048AA;
+  width: 275px;
+  height: 100%;
+}
+
+.displayChat{
+  background-color: #999;
+  display: flex;
+  flex-grow: 1;
 }
