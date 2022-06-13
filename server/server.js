@@ -2,53 +2,15 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
-
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
-
-const cors = require('cors')
-app.use(cors());
+const PORT = 3000;
 
 const eventsRouter = require('./routes/eventsRouter.js');
 
-const PORT = 3000;
-
-// app.use(testingConnection)
-io.on('connection', (socket) => { //when the client connects...
-    console.log('heldksfjngkdsfljgsldjgf');
-    console.log(socket.id, "socket id");
-})
-// io.of("user/chats/event").on("connection", (socket) => {
-//     console.log(socket.id);
-//   });
-
-// app.get('/test', testingConnection, (req,res) =>{
-//   console.log("working")
-//   res.status(200).send("okay")
-// })
-
-// function testingConnection(req, res, next) {
-// io.on('connection', (socket) => { //when the client connects...
-//     console.log(socket.id);
-//     res.locals.sock = socket.id;
-//     // socket.on('send-message', (message, eventLocation) => { // creating a custom listener event, client sends message
-//     //     if (eventLocation)
-//     //     socket.broadcast.emit('custom-event2', message) //receive-message
-//     //         //insert into the database w/ pool.query
-            
-//     // })
-// })
-// next();
-// }
-
-
 app.use('/build', express.static(path.join(__dirname, '../build')));
+//app.use(express.static(path.join(__dirname, '../build')));
 
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
-
 
 
 app.get('/', (req, res) => {
@@ -56,8 +18,14 @@ app.get('/', (req, res) => {
 })
 
 
+app.use('/', eventsRouter);
+    // localhost:3000/login --> router.get('/')
+    //http://localhost:8080/login?username=a&password=1234&location=b 
+    // how to handle sign ups
+
+
 //app.use('/:user/chat', chatRouter);
-app.use('/:user', eventsRouter);
+// app.use('/:user', eventsRouter);
 
 
 //Error handling
@@ -66,9 +34,8 @@ app.use((req, res) => {
     return res.status(404).send('Page not found.')
   });
 
-app.use(defaultErrorHandler);
-
-function defaultErrorHandler(err, req, res, next){
+  app.use(defaultErrorHandler);
+  function defaultErrorHandler(err, req, res, next){
     const defaultErr = 
     {
       log : 'Express error handler caught unknown middleware error',
@@ -80,11 +47,7 @@ function defaultErrorHandler(err, req, res, next){
     return res.status(errorObj.status).send(JSON.stringify(errorObj.message));
   };
 
-server.listen(3000, () => {
-    console.log('listening on :', PORT, process.env.NODE_ENV);
-  });
 
-// app.listen(3000, () => {
-//     console.log('listening on port:', PORT, process.env.NODE_ENV);
-// }); //NOT LISTENING TO ACTUAL APPLICATION DOESN'T PRODUCE ERROR: EADDRINUSE 
-//websocket server is latched on to express server
+app.listen(PORT, () => {
+    console.log('listening on port:', PORT, process.env.NODE_ENV);
+});
