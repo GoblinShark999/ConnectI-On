@@ -16,6 +16,13 @@
   text-decoration: inherit;
 }
 
+.eventSearchButton {
+  background-color: red;
+}
+
+
+
+
 .signOutButton{
   grid-column: 6 / 6;
   color: inherit;
@@ -88,4 +95,8 @@
   color: inherit;
   text-decoration: inherit;
   margin:50px 200px 50px 200px;
+}
+
+.testButtonColor{
+  background-color: black;
 }

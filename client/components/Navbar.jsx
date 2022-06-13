@@ -6,16 +6,17 @@ import ChatPage from './ChatPage.jsx';
 import Login from './Login.jsx';
 import App from './app.jsx'
 
+
 export default function Navbar() {
   return(
     <nav>
       <Router >
         <div className ='navbar'>
-          <Link to="/:user" className='button'> 
+          <Link to="/:user" className='button'>
             <Button type="button">
               Search
             </Button></Link>
-          <Link to="/user/chats" className='button'> 
+          <Link to="/user/chats" className='button'>
             <Button type="button">
               Chat
             </Button></Link>
@@ -25,7 +26,7 @@ export default function Navbar() {
             </Button>
           </Link>
         </div>
-        
+
 
         <Routes>
           <Route path="/:user" element={''}/>

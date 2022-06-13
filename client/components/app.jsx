@@ -3,6 +3,10 @@ import React, {useEffect, useState} from 'react';
 import LoginNavbar from './LoginNavbar.jsx';
 import Login from './Login.jsx';
 import Navbar from './Navbar.jsx';
+import {Box, Input, Button} from '@mui/material';
+import EventsPage from './EventsPage.jsx'
+
+
 
 function App(props) {
     const [userData, setUserData] = useState({
@@ -11,6 +15,15 @@ function App(props) {
         password: '',
         location: ''
     });
+
+    const [eventData, setEventData] = useState ({
+        searchEventName: '',
+        searchEventLocation: '',
+        eventCardsContainer: []
+    });
+
+
+
     const [isNewUser, setIsNewUser] = useState(false);
     return (
         <div>
