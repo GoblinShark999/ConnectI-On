@@ -4,6 +4,7 @@ import ErrorPage from './ErrorPage.jsx';
 import HomePage from './HomePage.jsx';
 import Button from '@mui/material/Button';
 import '../stylesheets/styling.scss';
+import ChatPage from './ChatPage.jsx';
 
 export default function Navbar() {
   return(
@@ -29,7 +30,7 @@ export default function Navbar() {
         <Routes>
           <Route path="/" element={<HomePage/>}/>
           <Route path="/:user" element={''}/>
-          <Route path="/user/chats" element={''}/>
+          <Route path="/user/chats" element={<ChatPage/>}/>
           <Route path="/signOut" element={''}/>
           <Route path="*" element={<ErrorPage/>}/>
         </Routes>
