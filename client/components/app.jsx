@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import React, {useEffect, useState} from 'react';
 //import './stylesheets/styling.scss';
 import {Box, Input, Button} from '@mui/material';
@@ -56,49 +54,3 @@ const Login = (props) => {
         )
     }
 }
-
-
-function handleSubmit(e) {
-
-}
-// <button
-// onClick = {(event)
-// =>
-// setUserData({...userData, [event.target.name]: event.target.value})
-// }><
-// /button>
-
-// const [value, setValue] = React.useState('');
-
-// function handleChange(e){
-
-//   setValue(e.target.value);
-//   //console.log(value);
-// }
-
-// function handleSubmit(e){
-//   props.add_market(value);
-//   setValue('');
-//   //console.log(props);
-//   //this.setState({value: event.target.value});
-
-//   e.preventDefault();
-// }
-
-/* <form onSubmit={handleSubmit}>
-        <label>
-          Location:
-          <input type="text" value = {value} onChange={handleChange}/>
-        </label>
-        <input type="submit" value="Add Market" />
-      </form> */
-
-
-// const [allValues, setAllValues] = useState({
-//   mobile: '',
-//   username: '',
-//   email: '',
-//   password: '',
-//   confirmPassword: ''
-// });
->>>>>>> Stashed changes
