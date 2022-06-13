@@ -39,7 +39,6 @@ catch(err){
     }
 }
 
-
 userController.getUser = async (req,res,next) =>{
     console.log(req.body,'req body from user_test')
 
@@ -104,14 +103,14 @@ userController.updateUser = async (req,res,next) => {
 
 // CREATE TABLE user (
 //     _id     SERIAL PRIMARY KEY,
-//     user         VARCHAR,
+//     username      VARCHAR,
 //     password      VARCHAR,
 //     location     VARCHAR,
 //     session     VARCHAR,
-//     chat_id     INT,     
+//     chat_id     INT     
 //   );
 
-// CREATE TABLE event_data (
+// CREATE TABLE event_data_test (
 //     _id     SERIAL PRIMARY KEY,
 //     name         VARCHAR,
 //     location     VARCHAR,
@@ -120,33 +119,32 @@ userController.updateUser = async (req,res,next) => {
 //     date_created DATE, 
 //     created_by   INT,
 //     chat_id     INT
-//          
+         
 //   );
 
-// CREATE TABLE chat (
+// CREATE TABLE chat_test (
 //     _id     SERIAL PRIMARY KEY,
 //     user         VARCHAR,
 //     message      VARCHAR,
 //     date         DATE,
-//     event_id      INT,
-// 
+//     event     VARCHAR
 //   );
 
-//Join tables
-// CREATE TABLE user_event
-//(
-    //     _id     SERIAL PRIMARY KEY,
-    //     user_id         VARCHAR,
-    //     event_id     VARCHAR,
-    //      chat_id     VARCHAR,
-    //   );
+// Join tables
+// CREATE TABLE user_event_test
+// (
+//         _id     SERIAL PRIMARY KEY,
+//         user_id         VARCHAR,
+//         event_id     VARCHAR,
+//          chat_id     VARCHAR
+//       );
 
-// CREATE TABLE user_chat
-//(
-    //     _id     SERIAL PRIMARY KEY,
-    //     user_id         VARCHAR,
-    //     chat_id     VARCHAR,
-    //   );
+// CREATE TABLE user_chat_test
+// (
+//         _id     SERIAL PRIMARY KEY,
+//         user_id         VARCHAR,
+//         chat_id     VARCHAR
+//       );
     
     //someUser, 1, 2 (chat_id points to CaliforniaEvent)
     

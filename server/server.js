@@ -17,15 +17,9 @@ app.get('/', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 })
 
-
-app.use('/', eventsRouter);
-    // localhost:3000/login --> router.get('/')
-    //http://localhost:8080/login?username=a&password=1234&location=b 
-    // how to handle sign ups
-
-
+//Do we want sign up and loging to be at / and not /:user?
 //app.use('/:user/chat', chatRouter);
-// app.use('/:user', eventsRouter);
+app.use('/', eventsRouter);
 
 
 //Error handling
