@@ -6,10 +6,10 @@ import '../stylesheets/styling.scss';
 
 export default function ChatPage(props) {
   return (
-    <div>
-
-      <Chat  chatName = 'chat 1' className = 'chat'/>
-      <DisplayChat className = 'displayChat'/>
+    <div className='chatContainer'>
+      
+      <Chat  chatName = 'chat 1'/>
+      <DisplayChat />
     </div>
   )
 }
