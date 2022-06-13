@@ -5,16 +5,17 @@ import HomePage from './HomePage.jsx';
 import Button from '@mui/material/Button';
 import '../stylesheets/styling.scss';
 
+
 export default function Navbar() {
   return(
     <nav>
       <Router >
         <div className ='navbar'>
-          <Link to="/:user" className='button'> 
+          <Link to="/:user" className='button'>
             <Button type="button">
               Search
             </Button></Link>
-          <Link to="/user/chats" className='button'> 
+          <Link to="/user/chats" className='button'>
             <Button type="button">
               Chat
             </Button></Link>
@@ -24,7 +25,7 @@ export default function Navbar() {
             </Button>
           </Link>
         </div>
-        
+
 
         <Routes>
           <Route path="/" element={<HomePage/>}/>
