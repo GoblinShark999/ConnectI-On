@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from 'react';
 //import './stylesheets/styling.scss';
-<<<<<<< HEAD
-import {Box, Input, Button} from '@mui/material';
-import EventsPage from './EventsPage.jsx'
-=======
-
->>>>>>> dev
 
 function App(props) {
     const [userData, setUserData] = useState({

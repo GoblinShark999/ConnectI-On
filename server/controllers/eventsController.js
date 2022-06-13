@@ -260,6 +260,46 @@ eventsController.postMessage = async (req,res,next) =>{
     
 }
 
+catch(err){ 
+    next({
+        log: 'Express error handler caught error in starWarsController.addCharacter',
+        status: 400,
+        message: { err: 'An error occurred' },
+      });
+}
+}
+///events/searchEvents?name=${eventData.name}&location=${eventData.location}`
+//search events by keywords/title
+eventsController.getEvents = async (req,res,next) =>{
+    console.log(req.body,'req body from user_test')
+
+    const {name, location, } = req.body;
+    const user = username;
+    const pass = password;
+    console.log(username,password)
+    const text = `SELECT * FROM user_test WHERE username=$1 AND password=$2`;
+    const values = [username, password]
+    try{
+        const userData = await db.query(text,values);
+        //console.log(userData)
+        res.locals.user = userData;
+        return next();
+    }
+    catch(err){
+        next({
+            log: 'Express error handler caught error in userController.getUser',
+            status: 400,
+            message: { err: 'An error occurred' },
+          });
+        }
+    }
+
+//update event info
+//add event to chat list
+
+
+
+module.exports = eventsController;
 
 
 

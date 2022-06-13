@@ -1,6 +1,8 @@
 // const fetch = require('node-fetch');
 // const { DllPlugin } = require('webpack');
 const db = require('../models/dataModel.js')
+const bcrypt = require('bcrypt');
+const saltRounds = 11;
 
 const userController = {};
 
@@ -9,16 +11,22 @@ userController.createUser = async (req,res,next) =>{
     console.log(req.body,'req body from user_test')
 
     const {username, password,location,session} = req.body
-    console.log(username)
     
+    console.log(username)
+    let hashedPassword;
+    
+    const hashing = await bcrypt.hash(password, saltRounds).then((hash) => {
+        hashedPassword = hash;
+    })
+    console.log('testing hashed, bcrypt password', hashedPassword);
     
 try{
     const text = 'INSERT INTO user_test(username, password,location,session) VALUES($1,$2,$3,$4) RETURNING *';//${username},${password},${location},${session}
     //const text = `INSERT INTO user_test(username,password,location,session) VALUES('aliya','1234','Boise','1')`;
-    const values = [username, password, location, session];
+    const values = [username, hashedPassword, location, session];
     console.log("there")
     const result = await db.query(text,values);
-    console.log(result)
+    // console.log('testing result', result) 
     res.locals.result = result;
     return next();
 }
@@ -36,14 +44,28 @@ userController.getUser = async (req,res,next) =>{
 
     const {username, password} = req.body;
     
-    console.log(username,password)
-    const text = `SELECT * FROM user_test WHERE username=$1 AND password=$2`;
-    const values = [username, password]
+
+    const text = `SELECT * FROM user_test WHERE username=$1`; //AND password=$2
+    const values = [username] //need only username to find row then later compare req.body.password to hashed db password
+
+
     try{
         const userData = await db.query(text,values);
-        //console.log(userData)
-        res.locals.user = userData;
-        return next();
+        const dbPassword = userData.rows[0].password;
+        const match = await bcrypt.compare(password, dbPassword); 
+        
+        // console.log(userData)
+
+        if (match) {
+            res.locals.user = userData;
+            return next();
+        } else {
+            return next({
+                log: 'Express error handler caught error in userController.getUser',
+                status: 401,
+                message: { err: 'Incorrect username and/or password.' },
+              })
+        }
     }
     catch(err){
         next({
@@ -79,13 +101,7 @@ userController.updateUser = async (req,res,next) => {
 
 
 
-
-
-
-
-
-
-// CREATE TABLE user_test (
+// CREATE TABLE user (
 //     _id     SERIAL PRIMARY KEY,
 //     username      VARCHAR,
 //     password      VARCHAR,
