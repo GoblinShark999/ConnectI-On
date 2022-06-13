@@ -26,8 +26,7 @@ const Login = (props) => {
                 <input type="text" name='password' value={props.userData.password} onChange={(e) => {handleNewUserInput(e, props.userData, props.setUserData)}}/>
                 Location:
                 <input type="text" name='location' value={props.userData.location} onChange={(e) => {handleNewUserInput(e, props.userData, props.setUserData)}}/>
-                <Button style={{backgroundColor: "green"}} type="submit" value="Signed in" onClick={() => {
-                }}/>
+                <Button style={{backgroundColor: "blue"}} type="submit" value="Signed in" onClick={() => {signUp()}}> Sign up </Button>
             </Box>
         )
     }
@@ -38,3 +37,8 @@ function handleNewUserInput(e, userData, setUserData) {
 }
 
 export default Login;
+
+
+function signUp(){
+  fetch()
+}

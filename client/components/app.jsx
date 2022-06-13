@@ -27,9 +27,9 @@ function App(props) {
     const [isNewUser, setIsNewUser] = useState(false);
     return (
         <div>
-            <Navbar></Navbar>
-            {//<LoginNavbar userData={userData} setUserData={setUserData} isNewUser={isNewUser} setIsNewUser={setIsNewUser}/>}
-            }{console.log(userData, isNewUser)}
+            {//<Navbar></Navbar>
+            }<LoginNavbar userData={userData} setUserData={setUserData} isNewUser={isNewUser} setIsNewUser={setIsNewUser}/>
+            {console.log(userData, isNewUser)}
         </div>
     )
 }
