@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 //import './stylesheets/styling.scss';
 import {Box, Input, Button} from '@mui/material';
-// import nav bar
+import Navbar from './Navbar.jsx'
 import eventCards from './eventCards.jsx'
 
 const event = {
@@ -19,14 +19,14 @@ function eventsPage (props) {
     eventCards: []
   })
 
-  useEffect(() => {
-    setEventData(eventData)
-  }, [eventData])
+  // useEffect(() => {
+  //   setEventData(eventData)
+  // }, [eventData])
 
 
-  function handleChange(e){
+  function handleChange(e, ){
     setEventData(() => ({...eventData, [e.target.name]: e.target.value}));
-    console.log(eventData);
+    console.log(eventData, 'from handle change');
   }
 
   function handleSubmit(e){
@@ -35,7 +35,7 @@ function eventsPage (props) {
     fetch(`/events/searchEvents?name=${eventData.name}&location=${eventData.location}`)
       .then((data) => data.json())
       .then((data) => {
-        setEventData({eventCards: [eventCards, data]})
+        setEventData({eventCards: [...data]})
       })
       .catch((err) => {
         console.log('error!')
@@ -53,17 +53,20 @@ function eventsPage (props) {
 
   return (
     <div>
-      {/* {nav bar} */}
-      <h1>NavBar</h1>
+      <div>
+        <Navbar />
+      </div>
       <form onSubmit={handleSubmit}>
         <label>
           Event Search:
-          <input type="text" name = 'eventSearch' value = {eventData.name} onChange={handleChange}/>
+          <input type="text" name="name" value={eventData.name} onChange={handleChange}/>
           Location:
-          <input type="text" name = 'eventLocation' value = {eventData.location} onChange={handleChange}/>
+          <input type="text" name="location" value={eventData.location} onChange={handleChange}/>
         </label>
-        <Button type="submit" value="Submit" />
-        <Button type="submit" value="Add Event" onClick={handleAddEvent}/>
+        <div className='testButtonColor'>
+        <Button className="eventSearchButton" type="submit" value="Submit" >Submit</Button>
+        <Button className="eventAddButton" type="submit" value="Add Event" onClick={handleAddEvent}>Add Event</Button>
+        </div>
       </form>
       <div id='eventCards'>
         {/* <eventContext.Provider value={event.name, event.location}>
