@@ -3,8 +3,9 @@ import { render } from 'react-dom';
 import App from './components/app.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
+import EventsPage from './components/EventsPage.jsx'
 
-// import styling from './stylesheets/styling.scss'; //client/stylesheets/styling.scss
+import styling from './stylesheets/styling.scss'; //client/stylesheets/styling.scss
 
 // render(
 //     <App />,

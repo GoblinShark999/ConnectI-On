@@ -1,8 +1,8 @@
 @import '_variables.scss';
 
-body{
-  background-color: $body-color;
-}
+// body{
+//   background-color: $body-color;
+// }
 .navbar {
   background-color: $navbar-color;
   display: grid;
@@ -16,8 +16,19 @@ body{
   text-decoration: inherit;
 }
 
+.eventSearchButton {
+  background-color: red;
+}
+
+
+
+
 .signOutButton{
   grid-column: 6 / 6;
   color: inherit;
   text-decoration: inherit;
+}
+
+.testButtonColor{
+  background-color: black;
 }
