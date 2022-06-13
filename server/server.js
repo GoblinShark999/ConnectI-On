@@ -17,9 +17,9 @@ app.get('/', (req, res) => {
     res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
 })
 
-
+//Do we want sign up and loging to be at / and not /:user?
 //app.use('/:user/chat', chatRouter);
-app.use('/:user', eventsRouter);
+app.use('/', eventsRouter);
 
 
 //Error handling
