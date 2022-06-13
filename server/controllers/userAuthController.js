@@ -7,43 +7,6 @@ const saltRounds = 11;
 
 const userAuthController = {};
 
-//password storage setup
-userAuthController.userSignUp = (req, res, next) => {
-    const { username, password } = req.body; //** might not come from req.body, deconstruct other necessary columns for db insertion
-
-    bcrypt.hash(password, saltRounds).then((hash) => {
-        // Store hash (hashed pw) in your password DB.
-            //pool.query + insert new user
-    });
-
-}
-
-userAuthController.checkUser = (req, res, next) =>{
-    const { username, password } = req.body; // grab other cols for row insertion into user table
-    
-    //... fetch user from db
-    const foundUser = await pool.query() // query for username and grab stored hashed pw
-
-    const match = await bcrypt.compare(password, foundUser.passwordHash); //boolean expected
-
-    if(match) {
-        //login
-    }
-
-    //...
-}
-
-
-
-//jwts set up
-app.post('/login', (req, res) => {
-    const { username } = req.body;
-    const user = { user: username };
-
-    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
-    res.json( {accessToken} ); //where does this get stored, headers?
-})
-
 //authenticate jwt
 userAuthController.authenticateJWT = (req, res, next) =>{
     const authHeader = req.headers('authorization');
@@ -59,12 +22,12 @@ userAuthController.authenticateJWT = (req, res, next) =>{
 }
 
 //now when user 'subscribes' to a chat, only those chats will show up instead of all
-app.get('/:user/event/:chats', authenticateJWT, (req, res) => {
-    //pool.query for user and chat's
-    const foundUser = pool.query()
-    if (foundUser.user !== req.user) res.status(401) //if user in DB and user from JWT are not the same, send back error page
+// app.get('/:user/event/:chats', authenticateJWT, (req, res) => {
+//     //pool.query for user and chat's
+//     const foundUser = pool.query()
+//     if (foundUser.user !== req.user) res.status(401) //if user in DB and user from JWT are not the same, send back error page
 
-    res.json(foundUser.chats) //return chats, this seems wrong
-})
+//     res.json(foundUser.chats) //return chats, this seems wrong
+// })
 
 module.exports = userAuthController;
