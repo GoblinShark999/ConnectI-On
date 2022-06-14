@@ -5,7 +5,7 @@ import '../stylesheets/styling.scss';
 import ChatPage from './ChatPage.jsx';
 import Login from './Login.jsx';
 import App from './app.jsx'
-
+import EventsPage from './EventsPage.jsx';
 
 export default function Navbar() {
   return(
@@ -29,7 +29,7 @@ export default function Navbar() {
 
 
         <Routes>
-          <Route path="/:user" element={''}/>
+          <Route path="/:user" element={<EventsPage/>}/>
           <Route path="/user/chats" element={<ChatPage/>}/>
           <Route path="/signOut" element={''}/>
         </Routes>

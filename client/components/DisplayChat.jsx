@@ -15,9 +15,9 @@ export default function DisplayChat(props) {
   return (
     <div className = 'displayChat'>
       <div className='displayMessage'>       
-        <MessageBox user = 'userasdasdasd1' message = 'hell11111o 1'/>
-        <MessageBox user = 'user2' message = 'hello 22222222222asdsadasd22222222222'/>
-        <MessageBox user = 'user3' message = 'h222ello 3'/>
+        <MessageBox user = 'Aliya' message = 'Howdy 🤠'/>
+        <MessageBox user = 'Anthony' message = '🥸'/>
+        <MessageBox user = 'Erin' message = 'I love React.'/>
       </div>
 
 

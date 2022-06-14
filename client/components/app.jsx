@@ -28,8 +28,9 @@ function App(props) {
     return (
         <div>
             {//<Navbar></Navbar>
-            }<LoginNavbar userData={userData} setUserData={setUserData} isNewUser={isNewUser} setIsNewUser={setIsNewUser}/>
-            {console.log(userData, isNewUser)}
+            }{<LoginNavbar userData={userData} setUserData={setUserData} isNewUser={isNewUser} setIsNewUser={setIsNewUser}/>
+          }{console.log(userData, isNewUser)}
+
         </div>
     )
 }

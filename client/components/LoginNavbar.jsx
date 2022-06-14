@@ -6,6 +6,7 @@ import '../stylesheets/styling.scss';
 import ChatPage from './ChatPage.jsx';
 import Login from './Login.jsx';
 import App from './app.jsx'
+import EventsPage from './EventsPage.jsx';
 
 export default function Navbar(props) {
   return(
@@ -21,6 +22,7 @@ export default function Navbar(props) {
         
         <Routes>
           <Route path="/login" element={<Login userData={props.userData} setUserData={props.setUserData} isNewUser={props.isNewUser} setIsNewUser={props.setIsNewUser}/>}/>
+          <Route path="/eventPage" element={<EventsPage userData={props.userData} setUserData={props.setUserData} isNewUser={props.isNewUser} setIsNewUser={props.setIsNewUser}/>}/>
         </Routes>
       </Router>
 

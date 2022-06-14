@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-
 const express = require('express');
 const router = express.Router();
 const eventsController = require('../controllers/eventsController.js');
@@ -12,7 +11,7 @@ router.post('/signup', userController.createUser, (req,res)=>{
 })
 
 
-router.get('/login', userController.getUser, (req,res) =>{
+router.post('/login', userController.getUser, (req,res) =>{
     res.status(200).json(res.locals.user)
 })
 
