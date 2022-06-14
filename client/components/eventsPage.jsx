@@ -19,16 +19,20 @@ function EventsPage (props) {
   }, []);
 
   // handles search inputs
-  function handleEventSearchInput(e){
+  function handleEventSearchInput(e, props){
     props.setEventData(() => ({...props.eventData, [e.target.name]: e.target.value}));
   }
 
   // get req to back end with event name or new location or both
   // returns event data objects to populate page
-  function handleSearchSubmit(e){
+  function handleSearchSubmit(e, props){
     e.preventDefault();
+    console.log(props)
 
-    fetch(`/events/searchEvents?name=${props.eventData.name}&location=${props.eventData.location}`)
+    console.log(props.eventData)
+
+    console.log(props.eventData.searchEventName)
+    fetch(`/events/searchEvents?name=${props.eventData.searchEventName}&location=${props.eventData.searchEventLocation}`)
       .then((data) => data.json())
       .then((data) => {
         props.setEventData({eventCardsContainer: [...data]})
@@ -47,9 +51,9 @@ function EventsPage (props) {
       <form onSubmit={handleSearchSubmit}>
         <label>
           Event Search:
-          <input type="text" name="name" value={props.eventData.searchEventName} onChange={handleEventSearchInput}/>
+          <input type="text" name="searchEventName" value={props.eventData.searchEventName} onChange={(e) => handleEventSearchInput(e, props)}/>
           Location:
-          <input type="text" name="location" value={props.eventData.searchEventLocation} onChange={handleEventSearchInput}/>
+          <input type="text" name="searchEventLocation" value={props.eventData.searchEventLocation} onChange={(e) => handleEventSearchInput(e, props)}/>
         </label>
         <div className='testButtonColor'>
         <Button className="eventSearchButton" type="submit" value="Submit" >Submit</Button>
