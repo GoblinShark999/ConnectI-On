@@ -10,7 +10,7 @@ const AddEventsPage = (props) => {
             <form>{/*//onSubmit={handleSubmit()}>*/}
                 <label>
                     Event Name:
-                    <input type="text" name='name' value={props.userData.username} onChange={(event) => {setNewEvent({...})}}/>
+                    <input type="text" name='name' value={props.userData.username} onChange={(event) => {setNewEvent({})}}/>
                     Location Name:
                     <input type="text" name='location' value={props.userData.password} onChange={(event) => {handleNewUserInput(event, props.userData, props.setUserData)}}/>
                     Description:
@@ -39,4 +39,4 @@ const AddEventsPage = (props) => {
     //         "date:" props.event.date;
     //     })
     // })}
-    }
+    //}

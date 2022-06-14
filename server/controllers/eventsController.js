@@ -260,14 +260,6 @@ eventsController.postMessage = async (req,res,next) =>{
     
 }
 
-catch(err){ 
-    next({
-        log: 'Express error handler caught error in starWarsController.addCharacter',
-        status: 400,
-        message: { err: 'An error occurred' },
-      });
-}
-}
 ///events/searchEvents?name=${eventData.name}&location=${eventData.location}`
 //search events by keywords/title
 eventsController.getEvents = async (req,res,next) =>{
