@@ -8,6 +8,7 @@ import Login from './Login.jsx';
 import App from './app.jsx'
 import EventsPage from './EventsPage.jsx';
 
+// props
 export default function Navbar(props) {
   return(
     <nav>
@@ -17,12 +18,31 @@ export default function Navbar(props) {
             <Button type="button">
               Login
             </Button>
+            {/* //--eric said to add a button that links to /eventpage */}
           </Link>
         </div>
         
         <Routes>
-          <Route path="/login" element={<Login userData={props.userData} setUserData={props.setUserData} isNewUser={props.isNewUser} setIsNewUser={props.setIsNewUser}/>}/>
-          <Route path="/eventPage" element={<EventsPage userData={props.userData} setUserData={props.setUserData} isNewUser={props.isNewUser} setIsNewUser={props.setIsNewUser}/>}/>
+          <Route path="/login" 
+          element={
+            <Login 
+              userData={props.userData} 
+              setUserData={props.setUserData} 
+              isNewUser={props.isNewUser} 
+              setIsNewUser={props.setIsNewUser}
+            />
+          }/>
+          <Route path="/eventPage" 
+          element={
+            <EventsPage 
+              userData={props.userData} 
+              setUserData={props.setUserData} 
+              isNewUser={props.isNewUser} 
+              setIsNewUser={props.setIsNewUser}
+              eventData={props.eventData}
+              setEventData={props.setEventData}
+            />}
+          />
         </Routes>
       </Router>
 

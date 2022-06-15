@@ -61,7 +61,7 @@ function EventsPage (props) {
         </div>
       </form>
       <div id='eventCards'>
-        <CardsContainter eventCardContainer={eventCardsContainer}/>
+        <CardsContainer eventCardContainer={eventCardsContainer}/>
       </div>
     </div>
   )
