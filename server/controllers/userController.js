@@ -43,7 +43,7 @@ userController.getUser = async (req, res, next) => {
 
 
   const text = `
-    SELECT _id, username, location
+    SELECT _id, username, password, location
     FROM users
     WHERE username = $1
   `;
@@ -58,7 +58,11 @@ userController.getUser = async (req, res, next) => {
     // console.log(userData)
 
     if (match) {
-      res.locals.user = userData;
+      res.locals.user = {
+        _id: userData._id,
+        username: userData.username,
+        location: userData.location
+      };
       return next();
     } else {
       return next({

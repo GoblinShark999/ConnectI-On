@@ -11,7 +11,7 @@ router.post('/signup', userController.createUser, (req,res)=>{
 })
 
 
-router.post('/login', userController.getUser, (req,res) =>{
+router.post('/login', userController.getUser, userAuthController.setJWT, (req, res) =>{
     res.status(200).json(res.locals.user)
 })
 
@@ -30,7 +30,7 @@ router.post('/:user/create', eventsController.createEvent, eventsController.addT
     res.status(200).json(res.locals.joint)
 })
 //Initial display -- all events at location
-router.get('/:user',eventsController.getEventsInitial, (req,res) => {
+router.get('/:user', userAuthController.authenticateJWT, eventsController.getEventsInitial, (req,res) => {
     res.status(200).json(res.locals.events)
 })
 //Search by location/name -- might need to change how we're getting search params

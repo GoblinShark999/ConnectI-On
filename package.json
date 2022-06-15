@@ -27,6 +27,7 @@
     "@mui/material": "^5.8.3",
     "axios": "^0.24.0",
     "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cross-env": "^5.2.0",
     "dom": "^0.0.3",

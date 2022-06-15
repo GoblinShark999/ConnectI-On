@@ -5,22 +5,26 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const saltRounds = 11;
 
+/** @typedef {import("express").RequestHandler} RequestHandler */
+
 const userAuthController = {};
 
 //authenticate jwt
+/** @type {RequestHandler} */
 userAuthController.authenticateJWT = (req, res, next) => {
-  const authHeader = req.headers('authorization');
-  const token = authHeader && authHeader.split(' ')[1]; //Bearer <Token>, token will be undefined or have a value
-  if (token === null) return res.status(401); //maybe use global error handler, next(err);
+  const { auth: token } = req.cookies;
+  console.log(req.cookies);
+  if (!token) return res.sendStatus(401); //maybe use global error handler, next(err);
 
   //now verify after getting the token
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => { //authenticate with jwts, what does req.user return
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, payload) => { //authenticate with jwts, what does req.user return
     if (err) {
       console.error(err);
-      return res.status(403); //again, use global error handler
+      return res.sendStatus(403); //again, use global error handler
     }
-    req.user = user;
-    next();
+    console.log(payload)
+    res.locals.user = payload;
+    return next();
   })
 }
 
@@ -32,5 +36,32 @@ userAuthController.authenticateJWT = (req, res, next) => {
 
 //     res.json(foundUser.chats) //return chats, this seems wrong
 // })
+
+/** @type {RequestHandler} */
+userAuthController.setJWT = (req, res, next) => {
+  // Check if res.locals.user actually has user info
+  if (!res.locals.user) {
+    return next({
+      log: 'userAuthController.getJWT: No user data stored in locals',
+      status: 500,
+      message: { err: 'An error occurred authenticating user' },
+    });
+  }
+
+  // Sign JWT, and store the token into cookies under 'auth'
+  jwt.sign(res.locals.user, process.env.ACCESS_TOKEN_SECRET, { algorithm: 'HS256' }, (err, token) => {
+    if (err) {
+      console.log(err);
+      return next({
+        log: 'Express error handler caught error in userAuthController.getJWT',
+        status: 500,
+        message: { err: 'An error occurred authenticating user' },
+      });
+    }
+
+    res.cookie('auth', token, { httpOnly: true });
+    return next();
+  });
+}
 
 module.exports = userAuthController;

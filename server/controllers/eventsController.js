@@ -97,7 +97,7 @@ eventsController.getEventsInitial = async (req, res, next) => {
       WHERE location = $1
     `;
     const values2 = [location]
-    const events = await db.query(text2, values2);
+    const events = (await db.query(text2, values2)).rows;
     res.locals.events = events;
     return next();
   }
