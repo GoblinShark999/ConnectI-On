@@ -48,16 +48,16 @@ router.get('/:user/search',eventsController.getEventsSearch, (req,res) => {
 //     res.status(200).json(res.locals.chat)
 // })
 
-router.get('/:user/chats/:events',eventsController.getChatLog, (req,res) =>{
+router.get('/:user/chats/:eventId',eventsController.getChatLog, (req,res) =>{
     res.status(200).json(res.locals.chat)
 })
 
-router.post('/:user/chats/:events',eventsController.postMessage, (req,res) =>{
+router.post('/:user/chats/:eventId',eventsController.postMessage, (req,res) =>{
     res.status(200).json(res.locals.chat)
 })
 
 //add user to event
-router.post('/:user/join/:events',eventsController.addUserToEvent,(req,res)=>{
+router.post('/:user/join/:eventId',eventsController.addUserToEvent,(req,res)=>{
     res.status(200).json(res.locals.chat)
 })
 
